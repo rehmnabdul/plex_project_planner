@@ -15,10 +15,10 @@ This document outlines the step-by-step development plan for building a Todoist 
 
 ### Step 1.1: Project Structure & Configuration
 **Backend Tasks:**
-- [ ] Set up CORS for Flutter apps
-- [ ] Configure file upload settings (500MB limit)
+- [x] Set up CORS for Flutter apps
+- [x] Configure file upload settings (500MB limit)
 - [ ] Set up application settings for configurable features
-- [ ] Configure multi-tenancy options (single & multi-tenant support)
+- [x] Configure multi-tenancy options (single & multi-tenant support)
 
 **Frontend Tasks:**
 - [ ] Initialize Flutter project structure
@@ -28,8 +28,8 @@ This document outlines the step-by-step development plan for building a Todoist 
 - [ ] Configure theme system (dark/light mode)
 
 **Tests:**
-- [ ] Write tests for CORS configuration
-- [ ] Write tests for file upload limits
+- [x] Write tests for CORS configuration
+- [x] Write tests for file upload limits
 - [ ] Write tests for application settings
 
 **Approval Required:** ✅ Before proceeding to Step 1.2

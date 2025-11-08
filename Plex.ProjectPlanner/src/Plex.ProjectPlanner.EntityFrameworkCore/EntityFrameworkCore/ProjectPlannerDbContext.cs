@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Plex.ProjectPlanner.Books;
+using Plex.ProjectPlanner.Settings;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -29,6 +30,7 @@ public class ProjectPlannerDbContext :
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<ApplicationSetting> ApplicationSettings { get; set; }
 
     #region Entities from the modules
 
@@ -87,6 +89,19 @@ public class ProjectPlannerDbContext :
                 ProjectPlannerConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+
+        builder.Entity<ApplicationSetting>(b =>
+        {
+            b.ToTable(ProjectPlannerConsts.DbTablePrefix + "ApplicationSettings",
+                ProjectPlannerConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Key).IsRequired().HasMaxLength(256);
+            b.Property(x => x.Value).IsRequired().HasMaxLength(2048);
+            b.Property(x => x.Description).HasMaxLength(512);
+            
+            // Create unique index on Key + TenantId
+            b.HasIndex(x => new { x.Key, x.TenantId }).IsUnique();
         });
         
         /* Configure your own tables/entities inside here */
