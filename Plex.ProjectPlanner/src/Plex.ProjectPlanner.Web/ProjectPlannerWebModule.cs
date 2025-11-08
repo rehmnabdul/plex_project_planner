@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -50,6 +51,10 @@ using Volo.Abp.OpenIddict;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Studio.Client.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+using System.Linq;
+using System.Reflection;
 
 namespace Plex.ProjectPlanner.Web;
 
@@ -144,6 +149,8 @@ public class ProjectPlannerWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+        ConfigureCors(context.Services);
+        ConfigureFileUpload(context.Services);
 
         Configure<PermissionManagementOptions>(options =>
         {
@@ -246,7 +253,11 @@ public class ProjectPlannerWebModule : AbpModule
     {
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(ProjectPlannerApplicationModule).Assembly);
+            options.ConventionalControllers.Create(typeof(ProjectPlannerApplicationModule).Assembly, opts =>
+            {
+                opts.RootPath = "api/app";
+                opts.RemoteServiceName = "Default";
+            });
         });
     }
 
@@ -255,11 +266,50 @@ public class ProjectPlannerWebModule : AbpModule
         services.AddAbpSwaggerGen(
             options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectPlanner API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "ProjectPlanner API",
+                    Version = "v1"
+                });
+                
+                // Include all actions - ABP conventional controllers will be included
                 options.DocInclusionPredicate((docName, description) => true);
+                
                 options.CustomSchemaIds(type => type.FullName);
             }
         );
+    }
+
+    private void ConfigureCors(IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .WithOrigins(
+                        "http://localhost:3000", // Flutter web default
+                        "http://localhost:8080", // Flutter web alternative
+                        "http://localhost:5000", // Flutter web alternative
+                        "https://localhost:3000",
+                        "https://localhost:8080",
+                        "https://localhost:5000"
+                    )
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+        });
+    }
+
+    private void ConfigureFileUpload(IServiceCollection services)
+    {
+        services.Configure<FormOptions>(options =>
+        {
+            options.MultipartBodyLengthLimit = 500 * 1024 * 1024; // 500MB
+            options.ValueLengthLimit = int.MaxValue;
+            options.ValueCountLimit = int.MaxValue;
+        });
     }
 
 
@@ -284,6 +334,7 @@ public class ProjectPlannerWebModule : AbpModule
         }
 
         app.UseCorrelationId();
+        app.UseCors();
         app.UseRouting();
         app.MapAbpStaticAssets();
         app.UseAbpStudioLink();
@@ -302,7 +353,7 @@ public class ProjectPlannerWebModule : AbpModule
         app.UseSwagger();
         app.UseAbpSwaggerUI(options =>
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectPlanner API");
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectPlanner API v1");
         });
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();

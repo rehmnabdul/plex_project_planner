@@ -120,7 +120,6 @@
 - Response format
 - Status codes
 - Error responses
-- API versioning
 - Backward compatibility
 
 ---
@@ -174,7 +173,7 @@ public class TaskApiIntegrationTests : IClassFixture<CustomWebApplicationFactory
         var dto = new CreateTaskDto { ... };
         
         // Act
-        var response = await client.PostAsJsonAsync("/api/v1/tasks", dto);
+        var response = await client.PostAsJsonAsync("/api/app/task", dto);
         
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Created);

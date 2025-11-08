@@ -69,7 +69,6 @@
 - **CQRS Pattern**: Separate read and write operations where beneficial
 - **Repository Pattern**: Data access abstraction
 - **Dependency Injection**: Loose coupling between layers
-- **API Versioning**: Support for multiple API versions
 - **Multi-tenancy**: Support for both single and multi-tenant scenarios
 
 ---
@@ -179,16 +178,8 @@
 #### 5. HTTP API Layer (`Plex.ProjectPlanner.HttpApi`)
 **Responsibilities:**
 - REST API controllers
-- API versioning
 - Request/response models
 - API documentation
-
-### API Versioning Strategy
-- **Base URL**: `/api/v{version}/`
-- **Version Format**: `v1`, `v2`, etc.
-- **Versioning Method**: URL path versioning
-- **Default Version**: v1
-- **Version Header**: Optional `api-version` header
 
 ### Authentication & Authorization
 - **Primary**: OAuth2/OpenID Connect (OpenIddict)
@@ -336,7 +327,7 @@ lib/
 ## API Design
 
 ### RESTful API Principles
-- **Resource-based URLs**: `/api/v1/projects`, `/api/v1/tasks`
+- **Resource-based URLs**: `/api/app/projects`, `/api/app/tasks`
 - **HTTP Methods**: GET, POST, PUT, PATCH, DELETE
 - **Status Codes**: Standard HTTP status codes
 - **Response Format**: JSON
@@ -345,65 +336,65 @@ lib/
 ### API Endpoints Structure
 
 #### Authentication
-- `POST /api/v1/auth/login` - Email/Password login
-- `POST /api/v1/auth/register` - User registration
-- `POST /api/v1/auth/refresh` - Refresh token
-- `POST /api/v1/auth/logout` - Logout
-- `GET /api/v1/auth/me` - Get current user
+- `POST /api/app/auth/login` - Email/Password login
+- `POST /api/app/auth/register` - User registration
+- `POST /api/app/auth/refresh` - Refresh token
+- `POST /api/app/auth/logout` - Logout
+- `GET /api/app/auth/me` - Get current user
 
 #### Projects
-- `GET /api/v1/projects` - List projects
-- `GET /api/v1/projects/{id}` - Get project
-- `POST /api/v1/projects` - Create project
-- `PUT /api/v1/projects/{id}` - Update project
-- `DELETE /api/v1/projects/{id}` - Delete project
-- `POST /api/v1/projects/{id}/reorder` - Reorder projects
+- `GET /api/app/project` - List projects
+- `GET /api/app/project/{id}` - Get project
+- `POST /api/app/project` - Create project
+- `PUT /api/app/project/{id}` - Update project
+- `DELETE /api/app/project/{id}` - Delete project
+- `POST /api/app/project/{id}/reorder` - Reorder projects
 
 #### Tasks
-- `GET /api/v1/tasks` - List tasks (with filters)
-- `GET /api/v1/tasks/{id}` - Get task
-- `POST /api/v1/tasks` - Create task
-- `PUT /api/v1/tasks/{id}` - Update task
-- `PATCH /api/v1/tasks/{id}/complete` - Complete task
-- `PATCH /api/v1/tasks/{id}/uncomplete` - Uncomplete task
-- `DELETE /api/v1/tasks/{id}` - Delete task
-- `POST /api/v1/tasks/bulk` - Bulk operations
-- `POST /api/v1/tasks/{id}/reorder` - Reorder tasks
+- `GET /api/app/task` - List tasks (with filters)
+- `GET /api/app/task/{id}` - Get task
+- `POST /api/app/task` - Create task
+- `PUT /api/app/task/{id}` - Update task
+- `PATCH /api/app/task/{id}/complete` - Complete task
+- `PATCH /api/app/task/{id}/uncomplete` - Uncomplete task
+- `DELETE /api/app/task/{id}` - Delete task
+- `POST /api/app/task/bulk` - Bulk operations
+- `POST /api/app/task/{id}/reorder` - Reorder tasks
 
 #### Subtasks
-- `GET /api/v1/tasks/{id}/subtasks` - List subtasks
-- `POST /api/v1/tasks/{id}/subtasks` - Create subtask
-- `PUT /api/v1/tasks/{taskId}/subtasks/{subtaskId}` - Update subtask
-- `DELETE /api/v1/tasks/{taskId}/subtasks/{subtaskId}` - Delete subtask
+- `GET /api/app/task/{id}/subtask` - List subtasks
+- `POST /api/app/task/{id}/subtask` - Create subtask
+- `PUT /api/app/task/{taskId}/subtask/{subtaskId}` - Update subtask
+- `DELETE /api/app/task/{taskId}/subtask/{subtaskId}` - Delete subtask
 
 #### Labels
-- `GET /api/v1/labels` - List labels
-- `POST /api/v1/labels` - Create label
-- `PUT /api/v1/labels/{id}` - Update label
-- `DELETE /api/v1/labels/{id}` - Delete label
+- `GET /api/app/label` - List labels
+- `POST /api/app/label` - Create label
+- `PUT /api/app/label/{id}` - Update label
+- `DELETE /api/app/label/{id}` - Delete label
 
 #### Comments
-- `GET /api/v1/tasks/{id}/comments` - List comments
-- `POST /api/v1/tasks/{id}/comments` - Create comment
-- `PUT /api/v1/comments/{id}` - Update comment
-- `DELETE /api/v1/comments/{id}` - Delete comment
+- `GET /api/app/task/{id}/comment` - List comments
+- `POST /api/app/task/{id}/comment` - Create comment
+- `PUT /api/app/comment/{id}` - Update comment
+- `DELETE /api/app/comment/{id}` - Delete comment
 
 #### Attachments
-- `GET /api/v1/tasks/{id}/attachments` - List attachments
-- `POST /api/v1/tasks/{id}/attachments` - Upload attachment
-- `GET /api/v1/attachments/{id}/download` - Download attachment
-- `DELETE /api/v1/attachments/{id}` - Delete attachment
+- `GET /api/app/task/{id}/attachment` - List attachments
+- `POST /api/app/task/{id}/attachment` - Upload attachment
+- `GET /api/app/attachment/{id}/download` - Download attachment
+- `DELETE /api/app/attachment/{id}` - Delete attachment
 
 #### Search
-- `GET /api/v1/search?q={query}` - Search tasks and projects
+- `GET /api/app/search?q={query}` - Search tasks and projects
 
 #### Export/Import
-- `POST /api/v1/export` - Export data
-- `POST /api/v1/import` - Import data
+- `POST /api/app/export` - Export data
+- `POST /api/app/import` - Import data
 
 #### Sync
-- `GET /api/v1/sync` - Get sync data
-- `POST /api/v1/sync` - Push sync changes
+- `GET /api/app/sync` - Get sync data
+- `POST /api/app/sync` - Push sync changes
 
 ### API Response Format
 

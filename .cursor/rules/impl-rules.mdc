@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+Strictly follow the plans in planning directory and build step by step (small steps).
+We are doing test driven development, so follow this test driven development.
+Ask user input after eash task and step.
+Don't work on multiple steps at once.
+ 
