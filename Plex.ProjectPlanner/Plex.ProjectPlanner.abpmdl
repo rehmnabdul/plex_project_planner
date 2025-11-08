@@ -1,0 +1,112 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "4.3.5",
+      "isInstalled": true
+    },
+    "Volo.Abp.Account": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    },
+    "Volo.Abp.TenantManagement": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "9.3.5",
+      "isInstalled": true,
+      "creationTime": "11/08/2025 13:17:27 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Plex.ProjectPlanner.Application": {
+      "path": "src/Plex.ProjectPlanner.Application/Plex.ProjectPlanner.Application.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.Application.Tests": {
+      "path": "test/Plex.ProjectPlanner.Application.Tests/Plex.ProjectPlanner.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Plex.ProjectPlanner.Domain.Shared": {
+      "path": "src/Plex.ProjectPlanner.Domain.Shared/Plex.ProjectPlanner.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.Application.Contracts": {
+      "path": "src/Plex.ProjectPlanner.Application.Contracts/Plex.ProjectPlanner.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.HttpApi": {
+      "path": "src/Plex.ProjectPlanner.HttpApi/Plex.ProjectPlanner.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.HttpApi.Client": {
+      "path": "src/Plex.ProjectPlanner.HttpApi.Client/Plex.ProjectPlanner.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.Web": {
+      "path": "src/Plex.ProjectPlanner.Web/Plex.ProjectPlanner.Web.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.Web.Tests": {
+      "path": "test/Plex.ProjectPlanner.Web.Tests/Plex.ProjectPlanner.Web.Tests.abppkg",
+      "folder": "test"
+    },
+    "Plex.ProjectPlanner.EntityFrameworkCore.Tests": {
+      "path": "test/Plex.ProjectPlanner.EntityFrameworkCore.Tests/Plex.ProjectPlanner.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Plex.ProjectPlanner.EntityFrameworkCore": {
+      "path": "src/Plex.ProjectPlanner.EntityFrameworkCore/Plex.ProjectPlanner.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.TestBase": {
+      "path": "test/Plex.ProjectPlanner.TestBase/Plex.ProjectPlanner.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Plex.ProjectPlanner.Domain.Tests": {
+      "path": "test/Plex.ProjectPlanner.Domain.Tests/Plex.ProjectPlanner.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Plex.ProjectPlanner.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Plex.ProjectPlanner.HttpApi.Client.ConsoleTestApp/Plex.ProjectPlanner.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "Plex.ProjectPlanner.DbMigrator": {
+      "path": "src/Plex.ProjectPlanner.DbMigrator/Plex.ProjectPlanner.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "Plex.ProjectPlanner.Domain": {
+      "path": "src/Plex.ProjectPlanner.Domain/Plex.ProjectPlanner.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}
