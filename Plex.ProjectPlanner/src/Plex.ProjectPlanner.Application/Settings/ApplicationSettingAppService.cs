@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -10,6 +11,8 @@ using System.Linq.Dynamic.Core;
 namespace Plex.ProjectPlanner.Settings;
 
 // TODO: Add proper authorization with ApplicationSettings permissions
+// Temporarily allowing anonymous for testing
+[AllowAnonymous]
 public class ApplicationSettingAppService : ApplicationService, IApplicationSettingAppService
 {
     private readonly IRepository<ApplicationSetting, Guid> _repository;
